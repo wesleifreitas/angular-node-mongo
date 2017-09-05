@@ -1,0 +1,84 @@
+<div layout="column" ng-cloak class="example-form" ng-init="vm.init()">
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Formulário</span>
+            </h2>
+        </div>
+    </md-toolbar>
+    <md-content layout="column" layout-padding class="content">
+        <div>
+            <form name="form">
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Nome</label>
+                        <input name="nome" ng-model="vm.example.nome" required>
+                        <div ng-messages="form.nome.$error">
+                            <div ng-message="required">Campo obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>CPF</label>
+                        <input name="cpf" ng-model="vm.example.cpf" ui-br-cpf-mask required>
+                        <div ng-messages="form.cpf.$error" multiple md-auto-hide="false">
+                            <div ng-message="required">Campo obrigatório.</div>
+                            <div ng-message="cpf">CPF inválido.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Endereço</label>
+                        <input name="endereco" ng-model="vm.example.endereco">
+                        <div ng-messages="form.endereco.$error">
+                            <div ng-message="required">Campo obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Estado</label>
+                        <md-select ng-model="vm.example.uf">
+                            <md-option><em></em></md-option>
+                            <md-option ng-repeat="option in vm.uf" ng-value="option.id">
+                                {{option.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Cartão</label>
+                        <input name="cartao" ng-model="vm.example.cartao" mask="9999 9999 9999 9999">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Data</label>
+                        <md-datepicker ng-model="vm.example.data"></md-datepicker>
+                        <div class="hint-datepicker">DD/MM/YYYY</div>
+                    </md-input-container>
+                </div>
+            </form>
+        </div>
+    </md-content>
+
+    <md-actions layout="row" layout-xs="column">
+
+        <md-button class="md-warn" ng-click="vm.removeById()" ng-if="vm.action === 'update'">
+            <i class="fa fa-times" aria-hidden="true"></i> Remover
+        </md-button>
+
+        <span flex></span>
+
+        <md-button ng-click="vm.cancel()">
+            <i class="" aria-hidden="true"></i> Cancelar
+        </md-button>
+
+        <md-button class="md-raised md-primary" ng-click="vm.save()" ng-disabled="form.$invalid">
+            <i class="fa fa-check" aria-hidden="true"></i> Salvar
+        </md-button>
+    </md-actions>
+</div>

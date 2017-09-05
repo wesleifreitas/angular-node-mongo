@@ -1,0 +1,224 @@
+<div layout="column" ng-cloak class="perfil-usuario">
+    <md-tabs md-center-tabs="true" md-dynamic-height md-border-bottom md-autoselect md-selected="vm.tabIndex" md-stretch-tabs="always">
+
+        <md-tab>
+            <md-tab-label><i class="fa fa-building" aria-hidden="true"></i>Grupo</md-tab-label>
+            <md-tab-body>
+                <md-content class="content" ng-controller="GrupoCtrl as vm" ng-init="vm.init()">
+                    <form name="formSearch" class="filter">
+                        <h5>Utilize o campo abaixo para filtrar a listagem.</h5>
+                        <div layout-gt-sm="row">
+                            <md-input-container flex-gt-sm="50" layout-xs="100">
+                                <label>Código</label>
+                                <input type="number" ng-model="vm.filter.GRUPO_ID">
+                            </md-input-container>
+                            <md-input-container flex-gt-sm="50" layout-xs="100">
+                                <label>Nome</label>
+                                <input ng-model="vm.filter.GRUPO_NOME">
+                            </md-input-container>
+                        </div>
+                    </form>
+                    <md-toolbar class="md-table-toolbar md-default" ng-hide="vm.grupo.selected.length">
+                        <div class="md-toolbar-tools">
+                            <span>Grupo</span>
+                            <span flex></span>
+                            <md-button class="md-primary" ng-click="vm.create()">
+                                <md-icon>add</md-icon>
+                                Adicionar
+                            </md-button>
+                            <md-button class="md-primary" ng-click="vm.getData({reset: true})">
+                                <md-icon>refresh</md-icon>
+                                Atualizar
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-toolbar class="md-accent md-hue-1" ng-show="vm.grupo.selected.length">
+                        <div class="md-toolbar-tools">
+                            <span>{{vm.grupo.selected.length}} {{vm.grupo.selected.length > 1 ? 'linhas selecionadas' : 'linha selecionada'}} </span>
+                            <span flex></span>
+                            <md-button class="md-icon-button" ng-click="vm.remove($event)">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <div>
+                        <md-table-container>
+                            <table md-table md-row-select="true" multiple="true" ng-model="vm.grupo.selected" md-progress="vm.grupo.promise">
+                                <thead md-head md-order="vm.grupo.order">
+                                    <tr md-row>
+                                        <th md-column><span></span></th>
+                                        <th md-column md-order-by=""><span>Nome</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody md-body>
+                                    <tr md-row md-select="item" md-select-id="ROW" ng-repeat="item in vm.grupo.data | orderBy: vm.grupo.order">
+                                        <td md-cell>
+                                            <md-button class="md-icon-button" ng-click="vm.update(item.GRUPO_ID)">
+                                                <md-icon>mode_edit</md-icon>
+                                            </md-button>
+                                        </td>
+                                        <td md-cell width="100%">{{item.GRUPO_NOME}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </md-table-container>
+                        <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Qtd. por página:', of: 'de'}" md-limit="vm.grupo.limit" md-page="vm.grupo.page" md-total="{{vm.grupo.total}}" md-page-select md-on-paginate="vm.grupo.pagination"></md-table-pagination>
+                    </div>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+
+        <md-tab>
+            <md-tab-label><i class="fa fa-users" aria-hidden="true"></i>Perfil de usuário</md-tab-label>
+            <md-tab-body>
+                <md-content class="content" ng-controller="PerfilCtrl as vm" ng-init="vm.init()">
+                    <form name="formSearch" class="filter">
+                        <h5>Utilize o campo abaixo para filtrar a listagem.</h5>
+                        <div layout-gt-sm="row">
+                            <md-input-container flex-gt-sm="100" layout-xs="100">
+                                <label>Nome do perfil</label>
+                                <input ng-model="vm.filter.nome">
+                            </md-input-container>
+                        </div>
+                    </form>
+                    <md-toolbar class="md-table-toolbar md-default" ng-hide="vm.perfil.selected.length">
+                        <div class="md-toolbar-tools">
+                            <span>Perfil de usuário</span>
+                            <span flex></span>
+                            <md-button class="md-primary" ng-click="vm.create()">
+                                <md-icon>add</md-icon>
+                                Adicionar
+                            </md-button>
+                            <md-button class="md-primary" ng-click="vm.getData({reset: true})">
+                                <md-icon>refresh</md-icon>
+                                Atualizar
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+
+                    <md-toolbar class="md-accent md-hue-1" ng-show="vm.perfil.selected.length">
+                        <div class="md-toolbar-tools">
+                            <span>{{vm.perfil.selected.length}} {{vm.perfil.selected.length > 1 ? 'linhas selecionadas' : 'linha selecionada'}} </span>
+                            <span flex></span>
+                            <md-button class="md-icon-button" ng-click="vm.remove($event)">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <div>
+                        <md-table-container>
+                            <table md-table md-row-select="true" multiple="true" ng-model="vm.perfil.selected" md-progress="vm.perfil.promise">
+                                <thead md-head md-order="vm.perfil.order">
+                                    <tr md-row>
+                                        <th md-column><span></span></th>
+                                        <th md-column md-order-by="PER_NOME"><span>Nome do perfil</span></th>
+                                        <th md-column md-order-by="PER_ATIVO_LABEL"><span>Status</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody md-body>
+                                    <tr md-row md-select="item" md-select-id="PER_ID" ng-repeat="item in vm.perfil.data | orderBy: vm.perfil.order">
+                                        <td md-cell>
+                                            <md-button class="md-icon-button" ng-click="vm.update(item.PER_ID)">
+                                                <md-icon>mode_edit</md-icon>
+                                            </md-button>
+                                        </td>
+                                        <td md-cell>{{item.PER_NOME}}</td>
+                                        <td md-cell>{{item.PER_ATIVO_LABEL}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </md-table-container>
+                        <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Qtd. por página:', of: 'de'}" md-limit="vm.perfil.limit" md-page="vm.perfil.page" md-total="{{vm.perfil.total}}" md-page-select md-on-paginate="vm.perfil.pagination"></md-table-pagination>
+                    </div>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+
+        <md-tab>
+            <md-tab-label><i class="fa fa-user" aria-hidden="true"></i>Usuário</md-tab-label>
+            <md-tab-body>
+                <md-content class="content" ng-controller="UsuarioCtrl as vm" ng-init="vm.init()">
+                    <form name="formSearch" class="filter">
+                        <h5>Utilize o campo abaixo para filtrar a listagem.</h5>
+                        <div layout-gt-sm="row">
+                            <md-input-container flex-gt-sm="33" layout-xs="100">
+                                <label>Nome</label>
+                                <input ng-model="vm.filter.nome">
+                            </md-input-container>
+
+                            <md-input-container flex-gt-sm="33" layout-xs="100">
+                                <label>Login</label>
+                                <input ng-model="vm.filter.login">
+                            </md-input-container>
+
+                            <md-input-container flex-gt-sm="33" layout-xs="100">
+                                <label>CPF</label>
+                                <input name="cpf" ng-model="vm.filter.cpf" ui-br-cpf-mask>
+                                <div ng-messages="formUsuarioSearch.cpf.$error" multiple md-auto-hide="false">
+                                    <div ng-message="cpf">CPF inválido.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </form>
+                    <md-toolbar class="md-table-toolbar md-default" ng-hide="vm.usuario.selected.length">
+                        <div class="md-toolbar-tools">
+                            <span>Usuário</span>
+                            <span flex></span>
+                            <md-button class="md-primary" ng-click="vm.create()">
+                                <md-icon>add</md-icon>
+                                Adicionar
+                            </md-button>
+                            <md-button class="md-primary" ng-click="vm.getData({reset: true})">
+                                <md-icon>refresh</md-icon>
+                                Atualizar
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+
+                    <md-toolbar class="md-accent md-hue-1" ng-show="vm.usuario.selected.length">
+                        <div class="md-toolbar-tools">
+                            <span>{{vm.usuario.selected.length}} {{vm.usuario.selected.length > 1 ? 'linhas selecionadas' : 'linha selecionada'}} </span>
+                            <span flex></span>
+                            <md-button class="md-icon-button" ng-click="vm.remove($event)">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                        </div>
+                    </md-toolbar>
+                    <div>
+                        <md-table-container>
+                            <table md-table md-row-select="true" multiple="true" ng-model="vm.usuario.selected" md-progress="vm.usuario.promise">
+                                <thead md-head md-order="vm.usuario.order">
+                                    <tr md-row>
+                                        <th md-column><span></span></th>
+                                        <th md-column md-order-by="PER_NOME"><span>Nome do usuario</span></th>
+                                        <th md-column md-order-by="USU_LOGIN"><span>Login</span></th>
+                                        <th md-column md-order-by="USU_CPF"><span>CPF</span></th>
+                                        <th md-column md-order-by="PER_NOME"><span>Perfil</span></th>
+                                        <th md-column md-order-by="USU_ATIVO_LABEL"><span>Status</span></th>
+                                        <th md-column><span>Último acesso</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody md-body>
+                                    <tr md-row md-select="item" md-select-id="USU_ID" ng-repeat="item in vm.usuario.data | orderBy: vm.usuario.order">
+                                        <td md-cell>
+                                            <md-button class="md-icon-button" ng-click="vm.update(item.USU_ID)">
+                                                <md-icon>mode_edit</md-icon>
+                                            </md-button>
+                                        </td>
+                                        <td md-cell>{{item.USU_NOME}}</td>
+                                        <td md-cell>{{item.USU_LOGIN}}</td>
+                                        <td md-cell nowrap>{{item.USU_CPF | brCpf}}</td>
+                                        <td md-cell>{{item.PER_NOME}}</td>
+                                        <td md-cell>{{item.USU_ATIVO_LABEL}}</td>
+                                        <td md-cell>{{item.USU_ULTIMOACESSO | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </md-table-container>
+                        <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Qtd. por página:', of: 'de'}" md-limit="vm.usuario.limit" md-page="vm.usuario.page" md-total="{{vm.usuario.total}}" md-page-select md-on-paginate="vm.usuario.pagination"></md-table-pagination>
+                    </div>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+    </md-tabs>
+</div>

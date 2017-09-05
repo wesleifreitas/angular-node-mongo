@@ -1,0 +1,138 @@
+@import (inline) "bower_components/angular-loading-bar/build/loading-bar.min.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "bower_components/angular-material/angular-material.min.css";
+@import "bower_components/font-awesome/less/font-awesome.less";
+@import (inline) "bower_components/angular-material-data-table/dist/md-data-table.min.css";
+@import "assets/jstree/themes/proton/style.less";
+@import (inline) "bower_components/angular-material-sidemenu/dest/angular-material-sidemenu.css";
+@fa-font-path: "bower_components/font-awesome/fonts";
+@icon-font-path: "bower_components/bootstrap/fonts/";
+@import "partial/login/login.less";
+@import "partial/home/home.less";
+@import "partial/perfil-usuario/perfil-usuario.less";
+@import "partial/perfil-usuario/grupo-form.less";
+@import "partial/perfil-usuario/perfil-form.less";
+@import "partial/perfil-usuario/usuario-form.less";
+@import "partial/example/example.less";
+@import "partial/example/example-form.less";
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body {
+	.myApp-views {
+		height: 100%;
+	}
+}
+
+px-nav-bar md-menu-bar button {
+	color: #FFFFFF;
+	font-size: 17px;
+}
+
+px-nav-bar md-menu-bar.md-default-theme md-menu.md-open > button, md-menu-bar md-menu.md-open > button, md-menu-bar.md-default-theme md-menu > button:focus, md-menu-bar md-menu > button:focus {
+	color: #000000;
+}
+
+md-menu-content.md-menu-bar-menu.md-dense .md-button span {
+	font-size: 17px;
+}
+
+table.clone thead tr:last-child th {
+	border-bottom: 1px rgba(0, 0, 0, 0.12) solid;
+}
+
+table.clone + md-table-container table tbody tr:first-child td {
+	border-top: block;
+}
+
+md-table-container.fix-head {
+	width: 100%;
+	min-height: 300px;
+	height: 100%;
+	.overflow {
+		background-color: white;
+		overflow: auto;
+		height: 100%;
+	}
+}
+
+.ng-invalid {
+	border-color: #A94442;
+	border-width: 1px;
+}
+
+.hint-datepicker {
+	/* Position the hint */
+	position: absolute;
+	left: 67px;
+	right: auto;
+	bottom: 7px;
+	/* Copy styles from ng-messages */
+	font-size: 10px;
+	line-height: 14px;
+	transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+	/* Set our own color */
+	color: grey;
+}
+
+.hint {
+	/* Position the hint */
+	position: absolute;
+	left: 2px;
+	right: auto;
+	bottom: 7px;
+	/* Copy styles from ng-messages */
+	font-size: 10px;
+	line-height: 14px;
+	transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+	/* Set our own color */
+	color: grey;
+}
+
+#loading-bar .bar {
+	background: #EF732B;
+}
+
+#loading-bar-spinner .spinner-icon {
+	border-top-color: #EF732B;
+	border-left-color: #EF732B;
+}
+
+#loading-bar .peg {
+	-moz-box-shadow: #EF732B 1px 0 6px 1px;
+	-ms-box-shadow: #EF732B 1px 0 6px 1px;
+	-webkit-box-shadow: #EF732B 1px 0 6px 1px;
+	box-shadow: #EF732B 1px 0 6px 1px;
+}
+
+md-content {
+	background-color: white;
+}
+
+md-actions {
+	background-color: white;
+	min-height: 50px;
+}
+
+.md-sidemenu-content {
+    display: block;
+}
+
+table[md-table] md-checkbox[disabled] {
+	background-color: #EEEEEE;
+}
+
+.center {
+	text-align: center !important;
+}
+
+.right {
+	text-align: right !important;
+}
+
+.left {
+	text-align: left !important;
+}

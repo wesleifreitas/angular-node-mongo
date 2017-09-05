@@ -1,0 +1,75 @@
+<div layout="column" ng-cloak flex="100" class="example" ng-init="vm.init()">
+    <div layout="column" layout-align="start stretch" class="content">
+
+        <form name="formSearch" class="filter">
+            <h5>Utilize os campos abaixo para filtrar a listagem.</h5>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex>
+                    <label>ID</label>
+                    <input ng-model="vm.filter.id">
+                </md-input-container>
+
+                <md-input-container class="md-block" flex>
+                    <label>Nome</label>
+                    <input ng-model="vm.filter.nome">
+                </md-input-container>
+            </div>
+        </form>
+
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="vm.example.selected.length">
+            <div class="md-toolbar-tools">
+                <span>Exemplo</span>
+                <span flex></span>
+                <md-button class="md-primary" ng-click="vm.create()">
+                    <md-icon>add</md-icon>
+                    Adicionar
+                </md-button>
+                <md-button class="md-primary" ng-click="vm.getData({reset: true})">
+                    <md-icon>refresh</md-icon>
+                    Atualizar
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-accent md-hue-1" ng-show="vm.example.selected.length">
+            <div class="md-toolbar-tools">
+                <span>{{vm.example.selected.length}} {{vm.example.selected.length > 1 ? 'linhas selecionadas' : 'linha selecionada'}} </span>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.remove($event)">
+                    <md-icon>delete</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-table-container layout="column" class="fix-head">
+            <div class="overflow">
+                <table md-table md-row-select="true" multiple="true" ng-model="vm.example.selected" md-progress="vm.example.promise">
+                    <thead fix-head md-head md-order="vm.example.order">
+                        <tr md-row>
+                            <th md-column><span></span></th>
+                            <th md-column md-order-by="NOME"><span>Nome</span></th>
+                            <th md-column md-order-by="CPF"><span>CPF</span></th>
+                            <th md-column>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row md-select="item" md-select-id="_ID" ng-repeat="item in vm.example.data | orderBy: vm.example.order">
+                            <td md-cell>
+                                <md-button class="md-icon-button" ng-click="vm.update(item._ID)">
+                                    <md-icon>mode_edit</md-icon>
+                                </md-button>
+                            </td>
+                            <td md-cell>{{item.NOME}}</td>
+                            <td md-cell>{{item.CPF | brCpf}}</td>
+                            <td md-cell>{{item.DATA}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </md-table-container>
+
+        <div>
+            <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Qtd. por página:', of: 'de'}" md-limit="vm.example.limit" md-page="vm.example.page" md-total="{{vm.example.total}}" md-page-select md-on-paginate="vm.example.pagination"></md-table-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<div layout="column" ng-cloak class="perfil-form" ng-init="vm.init()">
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Formulário (Perfil de usuário)</span>
+            </h2>
+        </div>
+    </md-toolbar>
+    <md-content layout="column" layout-padding>
+        <div>
+            <form name="form">
+                <div layout-gt-sm="row" layout-align="space-around center">
+                    <md-checkbox ng-model="vm.perfil.per_master" ng-true-value="1" ng-false-value="0">
+                        Administrador
+                    </md-checkbox>
+
+                    <!-- <div layout="row" layout-align="center center">
+                        <md-button class="md-accent md-raised" ng-click="vm.acesso()">
+                            <md-icon>lock_outline</md-icon>
+                            Controle de acesso
+                        </md-button>
+                    </div> -->
+                </div>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm="20">
+                        <label>Status</label>
+                        <md-select ng-model="vm.perfil.statusSelected">
+                            <md-option ng-repeat="option in vm.status" ng-value="option.id">
+                                {{option.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Nome</label>
+                        <input name="nome" ng-model="vm.perfil.nome" required>
+                        <div ng-messages="form.nome.$error">
+                            <div ng-message="required">Campo obrigatório.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </form>
+
+            <md-tabs md-dynamic-height md-center-tabs="true" md-border-bottom md-autoselect md-selected="0" md-stretch-tabs="always" class="tabs">
+
+                <md-tab>
+                    <md-tab-label><i class="fa fa-sitemap" aria-hidden="true"></i>Permissão de acesso</md-tab-label>
+                    <md-tab-body>
+                        <md-content>
+                            <div id="jstreeMenu" ng-init="vm.jstreeMenuConfig()"></div>
+                        </md-content>
+                    </md-tab-body>
+                </md-tab>
+
+                <md-tab>
+                    <md-tab-label><i class="fa fa-lock" aria-hidden="true"></i>Permissão de Grupos</md-tab-label>
+                    <md-tab-body>
+                        <md-content>
+                            <div id="jstreeGrupo" ng-init="vm.jstreeGrupoConfig()"></div>
+                        </md-content>
+                    </md-tab-body>
+                </md-tab>
+
+                <!-- <md-tab>
+                    <md-tab-label><i class="fa fa-user" aria-hidden="true"></i>Usuários</md-tab-label>
+                    <md-tab-body>
+                        [usuario]
+                    </md-tab-body>
+                </md-tab> -->
+            </md-tabs>
+        </div>
+    </md-content>
+
+    <md-divider></md-divider>
+
+    <md-actions layout="row" layout-xs="column">
+
+        <md-button class="md-warn" ng-click="vm.removeById()" ng-if="vm.action === 'update'">
+            <i class="fa fa-times" aria-hidden="true"></i> Remover perfil
+        </md-button>
+
+        <span flex></span>
+
+        <md-button ng-click="vm.cancel()">
+            <i class="" aria-hidden="true"></i> Cancelar
+        </md-button>
+
+        <md-button class="md-raised md-primary" ng-click="vm.save()" ng-disabled="form.$invalid">
+            <i class="fa fa-check" aria-hidden="true"></i> Salvar perfil
+        </md-button>
+    </md-actions>
+</div>

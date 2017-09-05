@@ -1,0 +1,62 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Menu" ng-click="vm.toggleLeft()" hide show-xs show-sm>
+            <md-icon class="material-icons">menu</md-icon>
+        </md-button>
+        <!-- <img src="assets/img/logo/logo-example-50x50.png"> -->
+        <md-button aria-label="Exemplo" ui-sref="example" hide-xs>
+            <md-icon class="material-icons" aria-hidden="true">home</md-icon>
+            <span>Home (Exemplo)</span>
+        </md-button>
+        <!-- <nav-bar item-click="vm.navBarClick(event)" flex hide-xs hide-sm sidemenu="vm.sidemenu"></nav-bar> -->
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Menu" ng-click="vm.toggleRight()">
+            <md-icon class="material-icons">menu</md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-content class="home">
+    <div>
+        {{vm.sidemenu}}
+    </div>
+    <div layout="row" layout-align="center center" ui-view class="container">
+    </div>
+</md-content>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <md-toolbar class="">
+        <h2 class="md-toolbar-tools">Configurações</h2>
+    </md-toolbar>
+    <md-content layout="column" layout-align="center stretch" layout-padding>
+        <form layout="column" layout-align="center stretch" layout-padding>
+
+            <md-autocomplete md-floating-label="Grupo" md-input-id="grupoSearch" id="grupoSearch" class="md-autocomplete-icon-search" md-no-cache="true" md-selected-item="vm.selectedItem" md-search-text-change="vm.searchTextChange(searchText)" md-search-text="vm.searchText"
+                md-selected-item-change="vm.selectedItemChange(item)" md-items="item in vm.querySearch(searchText)" md-item-text="item.GRUPO_NOME" md-min-length="1" placeholder="Digite um grupo" md-clear-button="false" ng-blur="vm.grupoSearchBlur($event)">
+                <md-item-template>
+                    <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.GRUPO_NOME}}</span>
+                </md-item-template>
+                <md-not-found>
+                    Grupo não encontrado.
+                </md-not-found>
+            </md-autocomplete>
+
+            <md-button class="md-raised md-block" aria-label="Learn More" layout-padding>
+                <i class="fa fa fa-user-circle-o fa-lg" aria-hidden="true"></i>{{vm.sideNav.username}}
+            </md-button>
+
+            <md-button ng-click="vm.logout();" class="md-primary md-block" layout-padding>
+                Sair do sistema
+            </md-button>
+
+        </form>
+    </md-content>
+</md-sidenav>
+
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+    <md-toolbar class="">
+        <h2 class="md-toolbar-tools">Navegação</h2>
+    </md-toolbar>
+    <md-content layout="column" layout-align="center stretch" layout-padding>
+        <!-- <side-menu item-click="vm.sideMenuClick(event)"></side-menu> -->
+    </md-content>
+</md-sidenav>

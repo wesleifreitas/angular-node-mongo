@@ -1,98 +1,94 @@
-<!doctype html>
-
-<!-- ASSIGN OUR ANGULAR MODULE -->
-<html ng-app="myApp">
+<!DOCTYPE html>
+<html lang="pt-br">
 
 <head>
-    <!-- META -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Optimize mobile viewport -->
-
-    <title>Node/Angular Todo App</title>
-
-    <!-- SCROLLS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-    <!-- load bootstrap -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        html {
-            overflow-y: scroll;
-        }
-        
-        body {
-            padding-top: 50px;
-        }
-        
-        #todo-list {
-            margin-bottom: 30px;
-        }
-        
-        #todo-form {
-            margin-bottom: 50px;
-        }
-    </style>
-
-    <!-- SPELLS -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-    <!-- load angular -->
-
-    <script src="js/controllers/main.js"></script>
-    <!-- load up our controller -->
-    <script src="js/services/todos.js"></script>
-    <!-- load our todo service -->
-    <script src="js/core.js"></script>
-    <!-- load our main application -->
-
+    <meta name="product" content="myApp">
+    <meta name="description" content="MyApp Project">
+    <meta name="author" content="">
+    <link href="favicon.ico" rel="shortcut icon">
+    <title>myApp</title>
+    <link href="app.less" type="text/css" rel="stylesheet/less">
 </head>
-<!-- SET THE CONTROLLER -->
 
-<body ng-controller="mainController">
-    <div class="container">
-
-        <!-- HEADER AND TODO COUNT -->
-        <div class="jumbotron text-center">
-            <h1>angular-node-mongodb <span class="label label-info">{{ todos.length }}</span></h1>
-        </div>
-
-        <!-- TODO LIST -->
-        <div id="todo-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-
-
-
-                <!-- LOOP OVER THE TODOS IN $scope.todos -->
-                <div class="checkbox" ng-repeat="todo in todos">
-                    <label>
-						<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
-					</label>
-                </div>
-
-                <p class="text-center" ng-show="loading">
-                    <span class="fa fa-spinner fa-spin fa-3x"></span>
-                </p>
-
-            </div>
-        </div>
-
-        <!-- FORM TO CREATE TODOS -->
-        <div id="todo-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                    <div class="form-group">
-
-                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                        <input type="text" class="form-control input-lg text-center" placeholder="" ng-model="formData.text">
-                    </div>
-
-                    <!-- createToDo() WILL CREATE NEW TODOS -->
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Adicionar</button>
-                </form>
-            </div>
-        </div>
-
-    </div>
-
+<body ng-app="myApp" layout="column" ng-cloak>
+    <div id="loading-bar-container"></div>
+    <div ui-view layout="column" class="myApp-views"></div>
+    <!-- htmlbuild:remove -->
+    <script src="http://localhost:35729/livereload.js"></script>
+    <script src="bower_components/less/dist/less.js"></script>
+    <!-- endbuild -->
+    <!-- htmlbuild:js -->
+    <!-- Libraries -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src='bower_components/ngMask/dist/ngMask.js'></script>
+    <script src="bower_components/angular-input-masks/angular-input-masks-standalone.js"></script>
+    <script src="bower_components/angular-br-filters/release/angular-br-filters.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/moment/min/moment-with-locales.js"></script>
+    <script src="bower_components/numeral/numeral.js"></script>
+    <script src="bower_components/angular-material-data-table/dist/md-data-table.js"></script>
+    <script src="bower_components/angular-fixed-table-header/src/fixed-table-header.js"></script>
+    <script src="bower_components/jstree/dist/jstree.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/ng-currency/dist/ng-currency.js"></script>
+    <script src="bower_components/angular-material-sidemenu/dest/angular-material-sidemenu.js"></script>
+    <!-- Your application bootstrap  -->
+    <script src="app.js"></script>
+    <!-- controllers -->
+    <script src="partial/login/login.controller.js"></script>
+    <script src="partial/home/home.controller.js"></script>
+    <script src="partial/perfil-usuario/perfil-usuario.controller.js"></script>
+    <script src="partial/perfil-usuario/grupo.controller.js"></script>
+    <script src="partial/perfil-usuario/grupo-form.controller.js"></script>
+    <script src="partial/perfil-usuario/perfil.controller.js"></script>
+    <script src="partial/perfil-usuario/perfil-dialog.controller.js"></script>
+    <script src="partial/perfil-usuario/perfil-form.controller.js"></script>
+    <script src="partial/perfil-usuario/usuario.controller.js"></script>
+    <script src="partial/perfil-usuario/usuario-form.controller.js"></script>
+    <script src="partial/404/404.controller.js"></script>
+    <script src="partial/todo/todo.controller.js"></script>
+    <script src="partial/example/example.controller.js"></script>
+    <script src="partial/example/example-form.controller.js"></script>
+    <!-- routes -->
+    <script src="partial/login/login.route.js"></script>
+    <script src="partial/home/home.route.js"></script>
+    <script src="partial/perfil-usuario/perfil-usuario.route.js"></script>
+    <script src="partial/perfil-usuario/grupo-form.route.js"></script>
+    <script src="partial/perfil-usuario/perfil-form.route.js"></script>
+    <script src="partial/perfil-usuario/usuario-form.route.js"></script>
+    <script src="partial/404/404.route.js"></script>
+    <script src="partial/todo/todo.route.js"></script>
+    <script src="partial/example/example.route.js"></script>
+    <script src="partial/example/example-form.route.js"></script>
+    <!-- directives -->
+    <script src="directive/compare-to/compare-to.js"></script>
+    <script src="directive/nav-bar/nav-bar.js"></script>
+    <script src="directive/side-menu/side-menu.js"></script>
+    <!-- services -->
+    <script src="service/login.service.js"></script>
+    <script src="service/user.service.js"></script>
+    <script src="service/toast.service.js"></script>
+    <script src="service/perfil.service.js"></script>
+    <script src="service/usuario.service.js"></script>
+    <script src="service/grupo.service.js"></script>
+    <script src="service/cep.service.js"></script>
+    <script src="service/todo.service.js"></script>
+    <script src="service/example.service.js"></script>
+    <!-- constants -->
+    <script src="constant/perfil.js"></script>
+    <script src="constant/usuario.js"></script>
+    <script src="constant/example.js"></script>
+    <!-- endbuild -->
 </body>
 
 </html>

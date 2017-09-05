@@ -1,0 +1,124 @@
+<div layout="column" ng-cloak class="usuario-form" ng-init="vm.init()">
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Formulário (Usuário)</span>
+            </h2>
+        </div>
+    </md-toolbar>
+    <md-content layout="column" layout-padding class="content">
+        <div>
+            <form name="form">
+                <div layout="row">
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Status do usuário</label>
+                        <md-select ng-model="vm.usuario.statusSelected">
+                            <md-option ng-repeat="option in vm.status" ng-value="option.id">
+                                {{option.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Perfil</label>
+                        <input name="perfil" ng-model="vm.usuario.perfil.nome" ng-readonly="true" required placeholder="Clique aqui para selecionar um perfil" class="perfil" ng-click="vm.perfilDialog($event)">
+                        <div ng-messages="form.perfil.$error">
+                            <div ng-message="required">Campo obrigatório.</div>
+                        </div>
+                    </md-input-container>
+                    <div ng-show="false">
+                        <md-button class="md-raised" ng-click="vm.perfilDialog($event)">
+                            <md-icon class="material-icons">search</md-icon>
+                        </md-button>
+                    </div>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Nome</label>
+                        <input name="nome" ng-model="vm.usuario.nome" required>
+                        <div ng-messages="form.nome.$error">
+                            <div ng-message="required">Campo obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Login</label>
+                        <input name="login" ng-model="vm.usuario.login" required>
+                        <div ng-messages="form.login.$error">
+                            <div ng-message="required">Campo obrigatório.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>E-mail</label>
+                        <input name="email" ng-model="vm.usuario.email" required type="email">
+                        <div ng-messages="form.email.$error">
+                            <div ng-message="required">Campo obrigatório.</div>
+                            <div ng-message="email">E-mail inválido.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>CPF</label>
+                        <input name="cpf" ng-model="vm.usuario.cpf" ui-br-cpf-mask required>
+                        <div ng-messages="form.cpf.$error" multiple md-auto-hide="false">
+                            <div ng-message="required">Campo obrigatório.</div>
+                            <div ng-message="cpf">CPF inválido.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Senha</label>
+                        <input type="password" name="senha" ng-model="vm.usuario.senha" required ng-disabled="vm.passwordDisabled">
+                        <div ng-messages="form.senha.$error">
+                            <div ng-message="required">Campo obrigatório.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm="">
+                        <label>Confirmação da senha</label>
+                        <input type="password" name="senha2" ng-model="vm.usuario.senha2" required compare-to="vm.usuario.senha" ng-disabled="vm.passwordDisabled">
+                        <div ng-messages="form.senha2.$error" multiple md-auto-hide="false">
+                            <div ng-message="compareTo">Digite a mesma senha</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div flex-gt-sm layout="row" layout-align="space-around end">
+                    <md-button class="" ng-click="vm.passwordRedefine($event)" ng-if="vm.action === 'update'">
+                        <md-icon class="material-icons">lock_open</md-icon> Redefinir senha
+                    </md-button>
+
+                    <md-checkbox ng-model="vm.usuario.senhaModificar" aria-label="" ng-show="true">
+                        Modificar a senha no próximo login.
+                    </md-checkbox>
+                </div>
+
+            </form>
+        </div>
+    </md-content>
+
+    <md-divider></md-divider>
+
+    <md-actions layout="row" layout-xs="column">
+
+        <md-button class="md-warn" ng-click="vm.removeById()" ng-if="vm.action === 'update'">
+            <i class="fa fa-times" aria-hidden="true"></i> Remover
+        </md-button>
+
+        <span flex></span>
+
+        <md-button ng-click="vm.cancel()">
+            <i class="" aria-hidden="true"></i> Cancelar
+        </md-button>
+
+        <md-button class="md-raised md-primary" ng-click="vm.save()" ng-disabled="form.$invalid">
+            <i class="fa fa-check" aria-hidden="true"></i> Salvar
+        </md-button>
+    </md-actions>
+</div>

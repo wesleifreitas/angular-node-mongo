@@ -1,0 +1,61 @@
+<md-dialog ng-cloak flex="70" aria-label="" ng-init="vm.init()" class="perfil-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Selecione um perfil</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                <i class="fa fa-close"></i>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-padding>
+        <form name="formSearch" class="filter">
+            <h5>Utilize o campo abaixo para filtrar a listagem.</h5>
+            <div layout-gt-sm="row">
+                <md-input-container flex-gt-sm="100" layout-xs="100">
+                    <label>Nome do perfil</label>
+                    <input ng-model="vm.filter.nome">
+                </md-input-container>
+            </div>
+        </form>
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="vm.perfil.selected.length">
+            <div class="md-toolbar-tools">
+                <span>Perfil de usuário</span>
+                <span flex></span>
+                <md-button class="md-primary" ng-click="vm.getData({reset: true})">
+                    <md-icon>refresh</md-icon>
+                    Atualizar
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-accent md-hue-1" ng-show="vm.perfil.selected.length">
+            <div class="md-toolbar-tools">
+                <span>{{vm.perfil.selected.length}} {{vm.perfil.selected.length > 1 ? 'linhas selecionadas' : 'linha selecionada'}} </span>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.remove($event)">
+                    <md-icon>delete</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <div>
+            <md-table-container>
+                <table md-table md-row-select="false" multiple="false" ng-model="vm.perfil.selected" md-progress="vm.perfil.promise">
+                    <thead md-head md-order="vm.perfil.order">
+                        <tr md-row>
+                            <th md-column md-order-by="PER_NOME"><span>Nome do perfil</span></th>
+                            <th md-column md-order-by="PER_ATIVO_LABEL"><span>Status</span></th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row md-select="item" md-select-id="PER_ID" md-auto-select ng-repeat="item in vm.perfil.data | orderBy: vm.perfil.order" ng-click="vm.itemClick(item)">
+                            <td md-cell>{{item.PER_NOME}}</td>
+                            <td md-cell>{{item.PER_ATIVO_LABEL}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+            <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Qtd. por página:', of: 'de'}" md-limit="vm.perfil.limit" md-page="vm.perfil.page" md-total="{{vm.perfil.total}}" md-page-select md-on-paginate="vm.perfil.pagination"></md-table-pagination>
+        </div>
+    </md-dialog-content>
+</md-dialog>
